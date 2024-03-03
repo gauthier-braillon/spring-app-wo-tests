@@ -1,12 +1,3 @@
-# The Practical Test Pyramid: Spring Boot Edition
-
-[![Build Status](https://circleci.com/gh/hamvocke/spring-testing/tree/master.svg?style=svg)](https://circleci.com/gh/hamvocke/spring-testing/tree/master)
-
-This repository contains a *Spring Boot* application with lots of test examples on different levels of the [Test Pyramid](https://martinfowler.com/bliki/TestPyramid.html). It shows an opinionated way to thoroughly test your spring application by demonstrating different types and levels of testing. You will find that some of the tests are duplicated along the test pyramid -- concepts that have already been tested in lower-level tests will be tested in more high-level tests. This contradicts the premise of the test pyramid. In this case it helps demonstrating different kinds of tests which is the main goal of this repository.
-
-## Read the Blog Post
-This repository is part of a [blog posts](https://martinfowler.com/articles/practical-test-pyramid.html) I wrote about test automation and the test pyramid. I highly recommend you read it to get a better feeling for the purpose of the different kinds of tests in this repository and how you can implement a reliable test suite for a Spring Boot application.
-
 ## Get started
 
 ### 1. Set an API Key as Environment Variable
@@ -89,63 +80,3 @@ The **Spring Service** itself has a pretty common internal architecture:
                 │   API    │
                 └──────────┘
   ```  
-
-## Test Layers
-The example applicationn shows different test layers according to the [Test Pyramid](https://martinfowler.com/bliki/TestPyramid.html).
-
-```
-      ╱╲
-  End-to-End
-    ╱────╲
-   ╱ Inte-╲
-  ╱ gration╲
- ╱──────────╲
-╱   Unit     ╲
-──────────────
-```
-
-The base of the pyramid is made up of unit tests. They should make the biggest part of your automated test suite.
-
-The next layer, integration tests, test all places where your application serializes or deserializes data. Your service's REST API, Repositories or calling third-party services are good examples. This codebase contains example for all of these tests.
-
-```
- ╭┄┄┄┄┄┄┄╮      ┌──────────┐      ┌──────────┐
- ┆   ☁   ┆  ←→  │    ☕     │  ←→  │    💾     │
- ┆  Web  ┆      │  Spring  │      │ Database │
- ╰┄┄┄┄┄┄┄╯      │  Service │      └──────────┘
-                └──────────┘
-
-  │    Controller     │      Repository      │
-  └─── Integration ───┴──── Integration ─────┘
-
-  │                                          │
-  └────────────── Acceptance ────────────────┘               
-```
-
-```
- ┌─────────┐  ─┐
- │    ☁    │   │
- │ Weather │   │
- │   API   │   │
- │  Stub   │   │
- └─────────┘   │ Client
-      ↑        │ Integration
-      ↓        │ Test
- ┌──────────┐  │
- │    ☕     │  │
- │  Spring  │  │
- │  Service │  │
- └──────────┘ ─┘
-```
-
-## Tools
-You can find lots of different tools, frameworks and libraries being used in the different examples:
-
-  * **Spring Boot**: application framework
-  * **JUnit**: test runner
-  * **Hamcrest Matchers**: assertions
-  * **Mockito**: test doubles (mocks, stubs)
-  * **MockMVC**: testing Spring MVC controllers
-  * **RestAssured**: testing the service end to end via HTTP
-  * **Wiremock**: provide HTTP stubs for downstream services
-
